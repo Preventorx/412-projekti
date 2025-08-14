@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sikanoppapeli</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <div class="container">
+        <h1>Sikanoppapeli</h1>
+        <div id="asetus" class="asetus">
+            <h2>Pelaajien määrä</h2>
+            <input type="number" id="pelaajaMaara" min="2" max="6" value="2">
+            <button id="aloitaPeli">Aloita</button>
+        </div>
+
+        <div id="pelaajaNimet" class="hidden">
+            <h2>Pelaajien nimet</h2>
+            <div id="nimiSyote"></div>
+            <button id="vahvistaNimet">Vahvista</button>
+        </div>
+
+        <div id="peli" class="hidden">
+            <div id="peliInfo">
+                <p id="nykyPelaaja"></p>
+                <p id="noppaTulos"></p>
+            </div>
+            <button id="heitaNoppa">Heitä noppaa</button>
+            <button id="pysy">Pidä pisteet</button>
+            <div id="pisteet"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
