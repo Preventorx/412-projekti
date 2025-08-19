@@ -3,11 +3,14 @@ let nykyPelaajaIndex = 0;
 let tulossaPisteet = 0;
 let peliPaalla = false;
 let voittoPisteet = 100;
+let peliVersio = 1;
+let tuplat = 0;
 
 // Aloitusnäkymä
 document.getElementById("aloitaPeli").addEventListener("click", () => {
     const pelaajaMaara = parseInt(document.getElementById("pelaajaMaara").value);
     voittoPisteet = parseInt(document.getElementById("voittoPisteet").value);
+    peliVersio = parseInt(document.getElementById("peliVersio").value);
 
     if (pelaajaMaara < 2 || pelaajaMaara > 6) {
         alert("Pelaajia on oltava 2-6!");
@@ -48,6 +51,16 @@ document.getElementById("vahvistaNimet").addEventListener("click", () =>{
 document.getElementById("heitaNoppa").addEventListener("click", () => {
     if (!peliPaalla) return;
 
+    if (peliVersio === 1) {
+        heitaYksiNoppa();
+    }   else {
+        heitaKaksiNoppa();
+    }
+});    
+
+
+// Yhen nopan heitto
+function heitaYksiNoppa() {
     const noppaTulos = Math.floor(Math.random() * 6) + 1;
     document.getElementById("noppaTulos").textContent = `Heitit: ${noppaTulos}`;
 
@@ -58,7 +71,38 @@ document.getElementById("heitaNoppa").addEventListener("click", () => {
         tulossaPisteet += noppaTulos;
         paivitaPeliInfo();
     }
-});
+}
+
+
+// Kahden nopan heitto
+function heitaKaksiNoppa() {
+    const noppa1 = Math.floor(Math.random() * 6) + 1;
+    const noppa2 = Math.floor(Math.random() * 6) + 1;
+
+    document.getElementById("noppaTulos").textContent = `Heitit nopat: ${noppa1} ja ${noppa2}`;
+
+    if (noppa1 === 1 && noppa2 === 1) {
+        tulossaPisteet += 25;
+        tuplat = 0;
+    } else if (noppa1 === noppa2) {
+        tulossaPisteet += (noppa1 + noppa2) * 2;
+        tuplat++;
+        if (tuplat === 3) {
+            tulossaPisteet = 0;
+            seuraavaPelaaja();
+            return;
+        }
+    } else if (noppa1 === 1 || noppa2 === 1) {
+        tulossaPisteet = 0;
+        seuraavaPelaaja();
+        return;
+    } else {
+        tulossaPisteet += noppa1 + noppa2;
+        tuplat = 0;
+    }
+
+    paivitaPeliInfo();
+}
 
 
 // Pisteissä pysyminen
