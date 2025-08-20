@@ -1,3 +1,4 @@
+// Määritellään tarvittavat globaalit muuttujat
 let pelaajat = [];
 let nykyPelaajaIndex = 0;
 let tulossaPisteet = 0;
